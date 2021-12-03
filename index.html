@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Promise-封装</title>
+	<!-- <script src="./promise.js"></script> -->
+</head>
+<body>
+	<script type="text/javascript">
+		// -----------------------------------------------
+		let p = new Promise((resolve, reject) => {
+			// resolve('OK')
+			// reject('error')
+			//抛出异常
+			// throw 'error'
+			setTimeout(() => {
+				resolve('OK')
+			},1000)
+		})
+
+		// console.log(p)
+
+		p.then(value => {
+			console.log('1:' + value)
+		}, reason => {
+			console.warn('1:' + reason)
+		})
+
+		p.then(value => {
+			console.log('2:' + value)
+		}, reason => {
+			console.warn('2:' + reason)
+		})
+
+		// -----------------------------------------------
+		//同步任务 then 返回结果
+		/*let p = new Promise((resolve, reject) => {
+			resolve('OK')
+		})
+		//执行then方法
+		const res = p.then(value => {
+			// console.log(value)
+			// return 'Hello, Promise'
+			return new Promise((resolve, reject) => {
+				// resolve('Success')
+				reject('Fail')
+			})
+			throw 'Error'
+		}, reason => {
+			console.warn(reason)
+		})
+		console.log(res)*/
+
+		// -----------------------------------------------
+		//异步任务 then 返回结果
+		/*let p = new Promise((resolve, reject) => {
+			setTimeout(() => {
+				resolve('OK')
+				// reject('No')
+			},)
+		})
+		//执行then方法
+		const res = p.then(value => {
+			return "Hello, Promise. value:" + value
+			// return new Promise((resolve, reject) => {
+			// 	// resolve('Success')
+			// 	reject('Fail')
+			// })
+			// throw 'Error'
+		}, reason => {
+			// console.warn(reason)
+			// return reason
+			return new Promise((resolve, reject) => {
+				resolve('Success')
+				// reject('Fail:' + reason)
+			})
+			// throw 'Fail'
+		})
+		console.log(res)*/
+
+		// -----------------------------------------------
+		//catch方法与异常穿透
+		/*let p = new Promise((resolve, reject) => {
+			setTimeout(() => {
+				// reject('No')
+				resolve("OK")
+			}, 1000)
+		})
+
+		p.then(value => {
+			console.log(111)
+		}).then(value => {
+			console.log(222)
+		}).then(value => {
+			console.log(333)
+		}).catch(reason => {
+			console.warn(reason)
+		})*/
+
+		// -----------------------------------------------
+		//Promise.resolve封装
+		/*const p1 = Promise.resolve('OK')
+		console.log(p1)
+		const p2 = Promise.resolve(new Promise((resolve,reject) => {
+			resolve('Success')
+		}))
+		console.log(p2)
+		const p3 = Promise.resolve(new Promise((resolve,reject) => {
+			reject('Fail')
+		}))
+		console.log(p3)
+		const p4 = Promise.resolve(Promise.resolve('Hello, Promise'))
+		console.log(p4)*/
+
+		// -----------------------------------------------
+		//Promise.reject
+		/*const p1 = Promise.reject('Error')
+		console.log(p1)
+		const p2 = Promise.reject(new Promise((resolve, reject) => {
+			resolve('OK')
+		}))
+		console.log(p2)*/
+
+		// -----------------------------------------------
+		//Promise.all
+		/*let p1 = new Promise((resolve, reject) => {
+			setTimeout(()=>{
+				resolve('OK')
+			}, 1000)
+		})
+		let p2 = Promise.resolve('Success')
+		let p3 = Promise.resolve('Hello, Promise')
+
+		let res = Promise.all([p1,p2,p3])
+		console.log(res)*/
+
+		// -----------------------------------------------
+		//Promise.race
+		/*let p1 = new Promise((resolve, reject) => {
+			setTimeout(()=>{
+				resolve('OK')
+			}, 1000)
+		})
+		let p2 = Promise.resolve('Success')
+		let p3 = Promise.resolve('Hello, Promise')
+
+		let res = Promise.race([p1,p2,p3])
+		console.log(res)*/
+
+		// -----------------------------------------------
+		//回调函数『异步执行』
+		/*let p1 = new Promise((resolve, reject) => {
+			// resolve('OK')
+			reject('Fail')
+			console.log(111)
+		})
+		p1.then(value => {
+			console.log(222)
+		}, reason => {
+			console.log(444)
+		})
+		console.log(333)*/
+	</script>
+</body>
+</html>
